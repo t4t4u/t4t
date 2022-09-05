@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "t4t",
+  "version": "0.1.0",
+  "description": "Tools for Typescript general purpose utility library",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "test": "ts-mocha",
+    "coverage": "nyc npm run test",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "docs": "typedoc",
+    "docs:watch": "typedoc --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorins/t4t.git"
+  },
+  "keywords": [
+    "utilities",
+    "tools",
+    "utility",
+    "tool"
+  ],
+  "author": "Jorin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jorins/t4t/issues"
+  },
+  "homepage": "https://github.com/jorins/t4t#readme",
+  "devDependencies": {
+    "@types/chai": "^4.3.3",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^18.7.15",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "chai": "^4.3.6",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-plugin-tsdoc": "^0.2.16",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "mocha": "^10.0.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.7.1",
+    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.9.1",
+    "typedoc": "^0.23.14",
+    "typescript": "^4.8.2"
+  }
+}
