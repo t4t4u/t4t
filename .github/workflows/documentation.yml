@@ -37,7 +37,7 @@ jobs:
         run: npm ci --prefer-offline
 
       - name: Build Typedoc
-        run: yarn typedoc
+        run: npm run typedoc
 
       - name: Run deploy script
         run: |
