@@ -13,6 +13,7 @@ jobs:
 
   docs:
     name: Publish documentation
+    needs: ci
     uses: ./.github/workflows/documentation.yml
 
   cd:
