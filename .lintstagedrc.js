@@ -5,5 +5,5 @@ const both = [lint, format]
 module.exports = {
   '*.ts': both,
   '.*rc.js': both,
-  '*.{json,md}': format,
+  '*.{json,md,yml,yaml}': format,
 }
