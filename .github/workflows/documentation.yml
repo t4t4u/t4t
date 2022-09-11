@@ -1,4 +1,4 @@
-name: Deploy documentation to github pages
+name: Deploy documentation to GitHub pages
 on:
   push:
     branches:
@@ -7,8 +7,8 @@ on:
       - '*'
 
 jobs:
-  gh-pages-deploy:
-    name: Deploying documentation to gh-pages
+  pages:
+    name: Deploy documentation to GitHub pages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
