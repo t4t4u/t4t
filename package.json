@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/t4t4u/t4t",
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.3",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.7.15",
