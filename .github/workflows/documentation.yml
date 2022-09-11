@@ -3,41 +3,22 @@ on:
   push:
     branches:
       - main
+    tags-ignore:
+      - '*'
 
 jobs:
   gh-pages-deploy:
     name: Deploying documentation to gh-pages
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout branch
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js 16.x for use with actions
-        uses: actions/setup-node@v1
+      - name: Retrieve docs artifact
+        uses: actions/download-artifact@v3
         with:
-          node-version: 16.x
-
-      - name: Cache node modules
-        id: cache-npm
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
-        with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key:
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{
-            hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: Install dependencies
-        run: npm ci --prefer-offline
-
-      - name: Build Typedoc
-        run: npm run docs
+          name: docs
+          path: docs
 
       - name: Run deploy script
         run: |

@@ -1,0 +1,22 @@
+name: Set up
+description: Set up node and cache, install dependencies
+
+inputs:
+  auth:
+    description: npmjs authentication token
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Set up node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: npm
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.auth }}
+
+    - name: Install dependencies
+      shell: sh
+      run: npm clean-install

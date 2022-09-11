@@ -1,32 +1,31 @@
 on:
   workflow_call:
     inputs:
-      version:
-        description: 'Version tag to push to'
-        required: false
+      target:
+        description: Publishing target excluding '@' sign e.g. 'latest', 'next'
+        required: true
         type: string
     secrets:
-      NPM_AUTH_TOKEN:
-        description: 'Authentication token for npm package host'
+      auth:
+        description: npmjs authentication token
         required: true
-
-env:
-  NODE_VERSION: 16
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up
+        uses: ./.github/actions/setup
+        with:
+          auth: ${{ inputs.auth }}
+
+      - name: Checkout build artifact
+        uses: actions/download-artifact@v3
         with:
           name: build
           path: dist
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      - run: npm publish --tag ${{ inputs.version }}
-      - run: npm run format
+
+      - run: npm publish --tag ${{ inputs.target }}

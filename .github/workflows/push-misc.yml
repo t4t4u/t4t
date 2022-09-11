@@ -1,0 +1,10 @@
+on:
+  push:
+    branches-ignore:
+      - main
+    tags-ignore:
+      - '*'
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml

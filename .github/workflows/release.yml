@@ -1,0 +1,16 @@
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
+  cd:
+    needs: ci
+    uses: ./.github/workflows/cd.yml
+    with:
+      target: next
+    secrets:
+      auth: ${{ secrets.NODE_AUTH_TOKEN }}
