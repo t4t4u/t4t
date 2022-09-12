@@ -6,11 +6,15 @@ on:
         description: Publishing target excluding '@' sign e.g. 'latest', 'next'
         required: true
         type: string
+      environment:
+        description: The GitHub environment to utilize for deployement
+        required: true
+        type: string
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: release
+    environment: ${{ inputs.environment }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
