@@ -6,14 +6,11 @@ on:
         description: Publishing target excluding '@' sign e.g. 'latest', 'next'
         required: true
         type: string
-    secrets:
-      auth:
-        description: npmjs authentication token
-        required: true
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: release
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -21,12 +18,12 @@ jobs:
       - name: Set up
         uses: ./.github/actions/setup
         with:
-          auth: ${{ inputs.auth }}
+          auth: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Checkout build artifact
         uses: actions/download-artifact@v3
         with:
-          name: build
+          name: package
           path: dist
 
       - run: npm publish --tag ${{ inputs.target }}
