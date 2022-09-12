@@ -1,11 +1,6 @@
 name: Set up
 description: Set up node and cache, install dependencies
 
-inputs:
-  auth:
-    description: npmjs authentication token
-    required: false
-
 runs:
   using: composite
   steps:
@@ -14,8 +9,7 @@ runs:
       with:
         node-version: 16
         cache: npm
-      env:
-        NPM_AUTH_TOKEN: ${{ inputs.auth }}
+        registry-url: 'https://registry.npmjs.org'
 
     - name: Install dependencies
       shell: sh

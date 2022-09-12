@@ -17,8 +17,6 @@ jobs:
 
       - name: Set up
         uses: ./.github/actions/setup
-        with:
-          auth: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Checkout build artifact
         uses: actions/download-artifact@v3
@@ -27,3 +25,5 @@ jobs:
           path: dist
 
       - run: npm publish --tag ${{ inputs.target }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
