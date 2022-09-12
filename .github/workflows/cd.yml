@@ -6,14 +6,15 @@ on:
         description: Publishing target excluding '@' sign e.g. 'latest', 'next'
         required: true
         type: string
-    secrets:
-      auth:
-        description: npmjs authentication token
-        required: true
+      environment:
+        description: Load this GitHub actions environment
+        required: false
+        type: string
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -21,7 +22,7 @@ jobs:
       - name: Set up
         uses: ./.github/actions/setup
         with:
-          auth: ${{ inputs.auth }}
+          auth: ${{ secrets.NODE_AUTH_TOKEN }}
 
       - name: Checkout build artifact
         uses: actions/download-artifact@v3
