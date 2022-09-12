@@ -1,0 +1,32 @@
+name: CD
+on:
+  workflow_call:
+    inputs:
+      target:
+        description: Publishing target excluding '@' sign e.g. 'latest', 'next'
+        required: true
+        type: string
+    secrets:
+      auth:
+        description: npmjs authentication token
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up
+        uses: ./.github/actions/setup
+        with:
+          auth: ${{ inputs.auth }}
+
+      - name: Checkout build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: dist
+
+      - run: npm publish --tag ${{ inputs.target }}

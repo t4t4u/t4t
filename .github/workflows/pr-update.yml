@@ -1,0 +1,7 @@
+name: Push to any branch
+on: pull_request
+
+jobs:
+  ci:
+    name: Run CI pipeline
+    uses: ./.github/workflows/ci.yml

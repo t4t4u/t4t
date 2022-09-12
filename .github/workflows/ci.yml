@@ -1,0 +1,89 @@
+name: CI
+on: workflow_call
+
+jobs:
+  format:
+    name: Check formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up
+        uses: ./.github/actions/setup
+
+      - name: Run formatter
+        run: npm run format
+
+  lint:
+    name: Check linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up
+        uses: ./.github/actions/setup
+
+      - name: Run linter
+        run: npm run lint
+
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up
+        uses: ./.github/actions/setup
+
+      - name: Run test suite
+        run: npm run coverage
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: coverage
+
+  build:
+    name: Build library
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up
+        uses: ./.github/actions/setup
+
+      - name: Build library
+        run: npm run build
+
+      - name: Pack library
+        run: npm pack
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: package
+          path: t4t-*.tgz
+
+  docs:
+    name: Generate docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up
+        uses: ./.github/actions/setup
+
+      - name: Generate docs
+        run: npm run docs
+
+      - name: Upload docs artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs
+          path: docs

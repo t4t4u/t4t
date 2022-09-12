@@ -1,0 +1,26 @@
+name: Push to main
+on:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '*'
+
+jobs:
+  ci:
+    name: Run CI pipeline
+    uses: ./.github/workflows/ci.yml
+
+  docs:
+    name: Publish documentation
+    needs: ci
+    uses: ./.github/workflows/documentation.yml
+
+  cd:
+    name: Publish package
+    needs: ci
+    uses: ./.github/workflows/cd.yml
+    with:
+      target: next
+    secrets:
+      auth: ${{ secrets.NODE_AUTH_TOKEN }}
