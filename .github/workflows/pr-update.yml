@@ -1,10 +1,5 @@
 name: Push to any branch
-on:
-  push:
-    branches-ignore:
-      - main
-    tags-ignore:
-      - '*'
+on: pull_request
 
 jobs:
   ci:
