@@ -15,7 +15,7 @@ runs:
         node-version: 16
         cache: npm
       env:
-        NODE_AUTH_TOKEN: ${{ inputs.auth }}
+        NPM_AUTH_TOKEN: ${{ inputs.auth }}
 
     - name: Install dependencies
       shell: sh
