@@ -22,4 +22,3 @@ jobs:
     uses: ./.github/workflows/cd.yml
     with:
       target: next
-      environment: next
