@@ -7,13 +7,6 @@ on:
         required: false
         default: latest
         type: string
-      version-suffix:
-        description: |
-          Version suffix to programatically add to package version e.g. 'rc3'.
-          Only used if target is not `latest`.
-        required: false
-        default: ${{ inputs.target }}${{ github.run_id }}
-        type: string
       environment:
         description: The GitHub environment to utilize for deployement
         required: true
@@ -42,13 +35,12 @@ jobs:
 
       - name: Infer version from git tag
         if: inputs.target == 'latest'
-        run: npm version from-git
+        run: npm version from-git --no-git-tag-version
 
       - name: Add version suffix
         if: inputs.target != 'latest'
         run: |
-          VER=$(node -e 'console.log(require("./package.json").version)')
-          npm version "${VER}-${{inputs.version-suffix}}"
+          npm version prerelease --preid=${{inputs.target}} --no-git-tag-version
 
       - run: npm publish --tag ${{ inputs.target }}
         env:
