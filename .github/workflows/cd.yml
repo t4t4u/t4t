@@ -29,7 +29,7 @@ jobs:
       - name: Checkout build artifact
         uses: actions/download-artifact@v3
         with:
-          name: package
+          name: build
           path: dist
 
       - run: npm publish --tag ${{ inputs.target }}

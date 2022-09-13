@@ -60,6 +60,12 @@ jobs:
       - name: Build library
         run: npm run build
 
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
+
       - name: Pack library
         run: npm pack
 
