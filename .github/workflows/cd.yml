@@ -4,7 +4,15 @@ on:
     inputs:
       target:
         description: Publishing target excluding '@' sign e.g. 'latest', 'next'
-        required: true
+        required: false
+        default: latest
+        type: string
+      version-suffix:
+        description: |
+          Version suffix to programatically add to package version e.g. 'rc3'.
+          Only used if target is not `latest`.
+        required: false
+        default: ${{ inputs.target }}${{ github.run_id }}
         type: string
       environment:
         description: The GitHub environment to utilize for deployement
@@ -31,6 +39,16 @@ jobs:
         with:
           name: build
           path: dist
+
+      - name: Infer version from git tag
+        if: inputs.target == 'latest'
+        run: npm version from-git
+
+      - name: Add version suffix
+        if: inputs.target != 'latest'
+        run: |
+          VER=$(node -e 'console.log(require("./package.json").version)')
+          npm version "${VER}-${{inputs.version-suffix}}"
 
       - run: npm publish --tag ${{ inputs.target }}
         env:

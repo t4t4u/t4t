@@ -14,5 +14,4 @@ jobs:
     needs: ci
     uses: ./.github/workflows/cd.yml
     with:
-      target: current
       environment: release
