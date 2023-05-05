@@ -15,5 +15,11 @@ module.exports = {
     'max-statements': 'warn',
     'no-warning-comments': 'warn',
     'tsdoc/syntax': 'error',
+    '@typescript-eslint/no-namespace': [
+      'error',
+      {
+        allowDeclarations: true,
+      },
+    ],
   },
 }
