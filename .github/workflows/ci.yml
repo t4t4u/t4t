@@ -60,6 +60,12 @@ jobs:
       - name: Build library
         run: npm run build
 
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
+
       - name: Pack library
         run: npm pack
 
@@ -82,8 +88,20 @@ jobs:
       - name: Generate docs
         run: npm run docs
 
+      - name: Archive docs
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory "$INPUT_PATH" \
+            -cvf "$RUNNER_TEMP/docs.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            .
+        env:
+          INPUT_PATH: docs
+
       - name: Upload docs artifact
         uses: actions/upload-artifact@v3
         with:
           name: docs
-          path: docs
+          path: ${{ runner.temp }}/docs.tar

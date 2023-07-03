@@ -4,24 +4,28 @@ on:
     inputs:
       target:
         description: Publishing target excluding '@' sign e.g. 'latest', 'next'
+        required: false
+        default: latest
+        type: string
+      environment:
+        description: The GitHub environment to utilize for deployement
         required: true
         type: string
     secrets:
-      auth:
-        description: npmjs authentication token
+      NPM_AUTH_TOKEN:
+        description: npm authentication token used for publishing
         required: true
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up
         uses: ./.github/actions/setup
-        with:
-          auth: ${{ inputs.auth }}
 
       - name: Checkout build artifact
         uses: actions/download-artifact@v3
@@ -29,4 +33,15 @@ jobs:
           name: build
           path: dist
 
+      - name: Infer version from git tag
+        if: inputs.target == 'latest'
+        run: npm version from-git --no-git-tag-version
+
+      - name: Add version suffix
+        if: inputs.target != 'latest'
+        run: |
+          npm version prerelease --preid=${{inputs.target}} --no-git-tag-version
+
       - run: npm publish --tag ${{ inputs.target }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
