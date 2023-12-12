@@ -38,14 +38,17 @@ jobs:
       - name: Set up
         uses: ./.github/actions/setup
 
-      - name: Run test suite
-        run: npm run coverage
+      # TODO: node's test runner's coverage reporting is not stable, switch to
+      # `npm run coverage` and re-enable uploading once it's stabilised.
 
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v3
-        with:
-          name: lcov.info
-          path: lcov.info
+      - name: Run test suite
+        run: npm run test
+
+      # - name: Upload coverage report
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: lcov.info
+      #     path: lcov.info
 
   build:
     name: Build library
