@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "test": "ts-mocha",
-    "coverage": "nyc npm run test",
+    "test": "node --require ts-node/register --test test/*.test.ts",
+    "coverage": "node --require ts-node/register --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info test/*.test.ts",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "docs": "typedoc",
