@@ -1,9 +1,10 @@
-import '../src/type'
+import { describe, it } from 'node:test'
+import assert from 'node:assert/strict'
 
-import { expect } from 'chai'
+import '../src/type'
 
 describe('type library', () => {
   it('works because it compiles', () => {
-    expect(true)
+    assert(true)
   })
 })
