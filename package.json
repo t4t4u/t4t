@@ -30,7 +30,20 @@
     "utility",
     "tool"
   ],
-  "author": "Jorin",
+  "author": {
+    "name": "t4t4u",
+    "url": "https://github.com/t4t4u"
+  },
+  "contributors": [
+    {
+      "name": "Jorin",
+      "url": "https://github.com/jorins"
+    },
+    {
+      "name": "Linn",
+      "url": "https://github.com/SimplyLinn"
+    }
+  ],
   "license": "MPL-2.0",
   "bugs": {
     "url": "https://github.com/t4t4u/t4t/issues"
