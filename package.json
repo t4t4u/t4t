@@ -7,18 +7,9 @@
     "dist"
   ],
   "exports": {
-    ".": {
-      "default": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./types": {
-      "default": null,
-      "types": "./dist/types.d.ts"
-    },
-    "./filters": {
-      "default": "./dist/filters.js",
-      "types": "./dist/filters.d.ts"
-    }
+    ".": "./dist/index.js",
+    "./types": "./dist/types.js",
+    "./filters": "./dist/filters.js"
   },
   "scripts": {
     "prepare": "husky install",
