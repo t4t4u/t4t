@@ -3,14 +3,18 @@
   "name": "t4t",
   "version": "0.1.0",
   "description": "Tools for Typescript general purpose utility library",
-  "main": "dist/index.js",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./types": "./dist/types.js",
+    "./filters": "./dist/filters.js"
+  },
   "scripts": {
     "prepare": "husky install",
-    "test": "ts-mocha",
-    "coverage": "nyc npm run test",
+    "test": "node --require ts-node/register --test test/*.test.ts",
+    "coverage": "node --require ts-node/register --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info test/*.test.ts",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "docs": "typedoc",
@@ -50,23 +54,16 @@
   },
   "homepage": "https://github.com/t4t4u/t4t",
   "devDependencies": {
-    "@istanbuljs/nyc-config-typescript": "^1.0.2",
-    "@types/chai": "^4.3.3",
-    "@types/mocha": "^9.1.1",
     "@types/node": "^18.7.15",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
-    "chai": "^4.3.6",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^22.0.0",
     "eslint-plugin-tsdoc": "^0.2.16",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "mocha": "^10.0.0",
-    "nyc": "^15.1.0",
     "prettier": "^2.7.1",
-    "ts-mocha": "^10.0.0",
     "ts-node": "^10.9.1",
     "typedoc": "^0.23.14",
     "typescript": "^4.8.2"
