@@ -1,4 +1,4 @@
-import '../src/type'
+import '../src/types'
 
 import { expect } from 'chai'
 

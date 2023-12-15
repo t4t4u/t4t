@@ -3,10 +3,14 @@
   "name": "t4t",
   "version": "0.1.0",
   "description": "Tools for Typescript general purpose utility library",
-  "main": "dist/index.js",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./types": "./dist/types.js",
+    "./filters": "./dist/filters.js"
+  },
   "scripts": {
     "prepare": "husky install",
     "test": "ts-mocha",
