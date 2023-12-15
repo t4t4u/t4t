@@ -1,2 +1,2 @@
-export * as types from './type'
-export * as filter from './filter'
+export * as types from './types'
+export * as filter from './filters'
