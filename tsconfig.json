@@ -3,7 +3,8 @@
   "compilerOptions": {
     "declaration": true,
     "strict": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "module": "node16"
   },
   "include": ["src/**/*"]
 }
